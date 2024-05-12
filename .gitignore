@@ -1,3 +1,4 @@
 src/assets/style.css*
 build/
-.nginx/
+node_modules/
+.idea/
