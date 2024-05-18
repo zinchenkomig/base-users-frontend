@@ -39,6 +39,6 @@ jobs:
           key: ${{ secrets.AUTH_TOKEN }}
           command_timeout: 15m
           script: |
-            if cd front; then git pull; else git clone https://github.com/zinchenkomig/base-users-frontend.git front; fi
+            if cd front; then git pull; else git clone https://github.com/zinchenkomig/base-users-frontend.git front; cd front; fi
             cd k8s
             helm upgrade front scratch-front/ -i
