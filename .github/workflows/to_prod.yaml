@@ -41,4 +41,4 @@ jobs:
           script: |
             if cd front; then git pull; else git clone https://github.com/zinchenkomig/base-users-frontend.git front; cd front; fi
             cd k8s
-            helm upgrade front scratch-front/ -i
+            KUBECONFIG=/etc/rancher/k3s/k3s.yaml helm upgrade front scratch-front/ -i
