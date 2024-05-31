@@ -34,9 +34,11 @@ const ProfileDropDown = () => {
     async function onLogoutClick(){
         await axios.post('/auth/logout');
         localStorage.removeItem('username');
+        localStorage.removeItem('roles');
         setUserInfo({});
         navigate('/')
     }
+    console.log(userInfo?.roles?.includes('admin'));
 
     return (
         <div ref={wrapperRef} className="dropdown-profile-container">

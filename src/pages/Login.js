@@ -6,6 +6,8 @@ import AuthContext from "../context/auth";
 import {useContext, useEffect} from "react";
 import {flushSync} from "react-dom";
 
+const telegram_bot_id = process.env.REACT_APP_TG_BOT_ID
+
 
 export default function Login(){
     const { register, handleSubmit, setError, formState: { errors } } = useForm({mode: "onBlur"});
@@ -20,10 +22,10 @@ export default function Login(){
             .then((response) => {
                 if (response.status === 200) {
                     localStorage.setItem('username', response.data.username);
-                    localStorage.setItem('scope', response.data.is_superuser?'superuser':'user')
+                    localStorage.setItem('roles', response.data.roles)
                     flushSync(() => {
                         setUserInfo({username: response.data.username,
-                            scope: response.data.is_superuser?'superuser':'user'
+                            roles: response.data.roles
                         })
                     });
                     navigate('/profile');
@@ -46,8 +48,6 @@ export default function Login(){
                 }
             );
     }
-
-
     return (
         <div>
             <h3>Login</h3>
@@ -94,10 +94,10 @@ function TelegramLogin(){
             .then((response) => {
                 if (response.status === 200) {
                     localStorage.setItem('username', response.data.username);
-                    localStorage.setItem('scope', response.data.is_superuser?'superuser':'user')
+                    localStorage.setItem('roles', response.data.roles)
                     flushSync(() => {
                         setUserInfo({username: response.data.username,
-                            scope: response.data.is_superuser?'superuser':'user'
+                            roles: response.data.roles
                         })
                     });
                     navigate('/profile');
@@ -119,7 +119,7 @@ function TelegramLogin(){
 
         script.src = "https://telegram.org/js/telegram-widget.js?22";
         script.async = true;
-        script.setAttribute('data-telegram-login', "BridgeHacker090623Bot");
+        script.setAttribute('data-telegram-login', telegram_bot_id);
         script.setAttribute('data-size',  "medium");
         script.setAttribute('data-request-access', "write");
         script.setAttribute(

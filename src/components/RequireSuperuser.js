@@ -8,7 +8,7 @@ const RequireSuperuser = () => {
     const { userInfo } = useContext(AuthContext);
 
     return (
-        userInfo?.scope === 'superuser'
+        userInfo?.roles?.includes('admin')
             ? <Outlet/>
             : <Navigate to="/" state={{from: location}} replace/>
     );

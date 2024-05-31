@@ -65,7 +65,7 @@ function Root() {
       <nav>
           <Link className="nav-link" to={`/`}>Home</Link>
 
-          {userInfo?.scope === 'superuser'
+          {userInfo?.roles?.includes("admin")
               ? <Link className="nav-link" to={`/manage/users`}>Manage</Link>
               : <></>
           }
