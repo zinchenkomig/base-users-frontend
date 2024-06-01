@@ -15,23 +15,27 @@ export default function Profile(){
 
     return(
         <div className="profile-container">
+            {userQuery.isFetched ?
+                <>
             <div className="profile-pic-container">
-                <img src={userQuery.isFetched ? userQuery.data['photo_url']: 'Loading'} alt="profile"/>
+                <img src={userQuery?.data['photo_url']} alt="profile"/>
             </div>
             <div className="profile-info-container">
                 <div className="profile-field">
-                    First Name: {userQuery.data['first_name']}
+                    First Name: {userQuery?.data['first_name']}
                 </div>
                 <div className="profile-field">
-                    Last Name: {userQuery.data['last_name']}
+                    Last Name: {userQuery?.data['last_name']}
                 </div>
                 <div className="profile-field">
-                    Username: {userQuery.data['username']}
+                    Username: {userQuery?.data['username']}
                 </div>
                 <div className="profile-field">
                     <button>Change Password</button>
                 </div>
             </div>
-        </div>
+                </>: 'Loading'
+            }
+                </div>
     )
 }
