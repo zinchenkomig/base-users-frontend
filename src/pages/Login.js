@@ -24,7 +24,8 @@ export default function Login(){
                     localStorage.setItem('username', response.data.username);
                     localStorage.setItem('roles', response.data.roles)
                     flushSync(() => {
-                        setUserInfo({username: response.data.username,
+                        setUserInfo({
+                            username: response.data.username,
                             roles: response.data.roles
                         })
                     });
