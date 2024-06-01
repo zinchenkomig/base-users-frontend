@@ -5,12 +5,14 @@
 replicaCount: 1
 
 image:
-  repository: zinchenkomig/bu_frontend
+  repository: cr.yandex/crp14m9keoja3jtgii9e/zinchenkomig/bu_frontend
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: yr-key
+
 nameOverride: ""
 fullnameOverride: ""
 
