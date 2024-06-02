@@ -5,8 +5,10 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
     const [userInfo, setUserInfo] = useState(
-        {username: localStorage.getItem('username'),
-                   roles: localStorage.getItem('roles')?.split(','),
+        {
+            user_id: localStorage.getItem('user_id'),
+            username: localStorage.getItem('username'),
+            roles: localStorage.getItem('roles')?.split(','),
                   }
         );
 

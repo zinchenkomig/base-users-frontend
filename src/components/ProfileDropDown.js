@@ -35,24 +35,24 @@ const ProfileDropDown = () => {
         await axios.post('/auth/logout');
         localStorage.removeItem('username');
         localStorage.removeItem('roles');
+        localStorage.removeItem('user_id');
         setUserInfo({});
         navigate('/')
     }
-    console.log(userInfo?.roles?.includes('admin'));
 
     return (
         <div ref={wrapperRef} className="dropdown-profile-container">
         <div className={(isOpened ? "nav-link-toggled" :"nav-link") + " profile-icon"}
              onClick={() =>
-             { if (!isOpened && userInfo.username){setIsOpened(true)}
-                else if(!userInfo.username){navigate('/login')}
+             { if (!isOpened && userInfo.user_id){setIsOpened(true)}
+                else if(!userInfo.user_id){navigate('/login')}
                 else{setIsOpened(false)}}
         }>
             <FaUser/>
         </div>
-        {isOpened && userInfo.username ?
+        {isOpened && userInfo.user_id ?
                 <div className="profile-dropdown">
-                    <div className="profile-dropdown-name">{userInfo.username}</div>
+                    <div className="profile-dropdown-name">{userInfo.username || 'unknown username'}</div>
                     <div className="profile-dropdown-body">
                         <ul>
                             <li> <Link className="profile-dropdown-link"

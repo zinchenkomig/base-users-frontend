@@ -23,10 +23,12 @@ export default function Login(){
                 if (response.status === 200) {
                     localStorage.setItem('username', response.data.username);
                     localStorage.setItem('roles', response.data.roles)
+                    localStorage.setItem('user_id', response.data.id)
                     flushSync(() => {
                         setUserInfo({
                             username: response.data.username,
-                            roles: response.data.roles
+                            roles: response.data.roles,
+                            user_id: response.data.id
                         })
                     });
                     navigate('/profile');
@@ -94,10 +96,14 @@ function TelegramLogin(){
         axios.post('/auth/tg/login', userData)
             .then((response) => {
                 if (response.status === 200) {
+                    console.log(response.data)
+                    localStorage.setItem('user_id', response.data.id);
                     localStorage.setItem('username', response.data.username);
-                    localStorage.setItem('roles', response.data.roles)
+                    localStorage.setItem('roles', response.data.roles);
                     flushSync(() => {
-                        setUserInfo({username: response.data.username,
+                        setUserInfo({
+                            user_id: response.data.id,
+                            username: response.data.username,
                             roles: response.data.roles
                         })
                     });
