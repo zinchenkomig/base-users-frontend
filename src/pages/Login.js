@@ -59,6 +59,7 @@ export default function Login(){
                     <div>Username</div>
                     <input
                         id="username"
+                        className="login-input"
                         {...register("username", {
                             required: "This field is required"
                         })}
@@ -69,6 +70,7 @@ export default function Login(){
                     <div>Password</div>
                     <input
                         type="password"
+                        className="login-input"
                         {...register("password", {
                             required: "This field is required"
                         })}

@@ -18,7 +18,7 @@ export default function Profile(){
             {userQuery.isFetched ?
                 <>
             <div className="profile-pic-container">
-                <img src={userQuery?.data['photo_url']} alt="profile"/>
+                <img src={userQuery?.data.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} alt="profile"/>
             </div>
             <div className="profile-info-container">
                 <div className="profile-field">
