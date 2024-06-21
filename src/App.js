@@ -10,6 +10,7 @@ import UserManagement from "./pages/UsersManagement";
 import {useContext} from "react";
 import AuthContext from "./context/auth";
 import ProfileDropDown from "./components/ProfileDropDown";
+import Verification from "./pages/Verification";
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,13 @@ const router = createBrowserRouter([
             {
                 path: "signup",
                 element: <SignUp/>
+            },
+            {
+                path: "verify/:user_guid",
+                element: <Verification/>,
+                loader:  async ({ params }) => {
+                    return {"user_guid": params.user_guid};
+                }
             }
         ]
     },

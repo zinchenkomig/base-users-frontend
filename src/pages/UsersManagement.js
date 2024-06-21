@@ -34,7 +34,7 @@ function UserRecord(user){
     const queryClient = useQueryClient();
     const deleteUserMutation = useMutation({
         mutationFn: (user) => {
-            return axios.post('/superuser/users/delete', null, {params: {user_id: user.id}})
+            return axios.post('/superuser/users/delete', null, {params: {guid: user.guid}})
                 .then(response => response.data)
         },
         onSuccess: async () => {
@@ -47,7 +47,7 @@ function UserRecord(user){
             const formData = new FormData(data);
             const formJson = Object.fromEntries(formData.entries());
             formJson["roles"] = formData.getAll("roles")
-            await axios.post('/superuser/users/update', formJson, {params: {user_id: user.id}});
+            await axios.post('/superuser/users/update', formJson, {params: {guid: user.guid}});
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries("users");

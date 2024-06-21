@@ -8,7 +8,7 @@ const RequireAuth = () => {
     const { userInfo } = useContext(AuthContext);
 
     return (
-    userInfo?.user_id
+    userInfo?.user_guid
         ? <Outlet/>
         : <Navigate to="/login" state={{from: location}} replace/>
     );

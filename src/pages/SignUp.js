@@ -46,7 +46,7 @@ export default function SignUp(){
                 <div className="input-field">
                     <div>Username</div>
                     <input
-                        className="form-control"
+                        className="login-input"
                         {...register("username", {
                             required: "This field is required",
                             minLength: {
@@ -61,7 +61,7 @@ export default function SignUp(){
                 <div className="input-field">
                     <div>E-Mail</div>
                     <input
-                        className="form-control"
+                        className="login-input"
                         type="email"
                         {...register("email", {
                             pattern: {
@@ -76,7 +76,7 @@ export default function SignUp(){
                     <div>Password</div>
                     <input
                         type="password"
-                        className="form-control"
+                        className="login-input"
                         {...register("password", {
                             required: "This field is required",
                             minLength: {
@@ -91,7 +91,7 @@ export default function SignUp(){
                     <div>Repeat password</div>
                     <input
                         type="password"
-                        className="form-control"
+                        className="login-input"
                         {...register("repeat_password", {
                             validate: (value) => {
                                 if (watch('password') !== value) {
