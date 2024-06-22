@@ -104,7 +104,7 @@ function TelegramLogin(){
                     localStorage.setItem('roles', response.data.roles);
                     flushSync(() => {
                         setUserInfo({
-                            user_guid: response.data.id,
+                            user_guid: response.data.guid,
                             username: response.data.username,
                             roles: response.data.roles
                         })
