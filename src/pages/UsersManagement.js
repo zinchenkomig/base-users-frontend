@@ -4,16 +4,18 @@ import {CancelButton, CheckButton, DeleteButton, EditButton} from "../components
 import {useContext, useState} from "react";
 import AuthContext from "../context/auth";
 import Select from 'react-select'
+import {CheckedIcon, UncheckedIcon} from "../components/Icons";
+import {MultiSelect} from "../components/Inputs";
 
 
 
-function UserRecordField({fieldName, children}){
+function UserRecordField({fieldName, children, isSingle}){
     return (
         <div className="user-record-info-field">
             <div className="user-record-info-field-name">
                 {fieldName}
             </div>
-            <div className="user-record-info-value">
+            <div className={"user-record-info-value" + (isSingle ? " user-record-info-value-single" : "" )}>
                 {children}
             </div>
         </div>
@@ -66,27 +68,27 @@ function UserRecord(user){
             <div className="user-record">
                     <div className="user-record-info">
                         <span><img src={user.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="user-small-pic" alt="profile"/></span>
-                        <UserRecordField fieldName="Username:">
+                        <UserRecordField isSingle={true} fieldName="Username:">
                             {!isEditing ?
                             user.username:
                             <input name="username" type="text" className="in-record-input" defaultValue={user.username}/>}
                         </UserRecordField>
-                        <UserRecordField fieldName="Email:" >
+                        <UserRecordField isSingle={true} fieldName="Email:" >
                             {!isEditing? user.email :
                                 <input name="email" type="text" className="in-record-input" defaultValue={user.email}/>}
                         </UserRecordField>
-                        <UserRecordField fieldName="Roles:" >
+                        <UserRecordField isSingle={false} fieldName="Roles:" >
                             {!isEditing?
                                 user.roles.join(", "):
-                                <Select name="roles" options={options}
-                                        className="multi-select-container"
-                                        classNamePrefix="multi-select"
-                                        unstyled
-                                        isMulti defaultValue={
-                                    user.roles.map(
-                                    (x)=> {return {"value": x, "label": x}})
-                                } />
+                                <MultiSelect options={options}
+                                        defaultValue={
+                                            user.roles.map(
+                                            (x)=> {return {"value": x, "label": x}})
+                                        } />
                             }</UserRecordField>
+                        <UserRecordField isSingle={true} fieldName="Verified:" >
+                            {user.is_verified ? <CheckedIcon/> : <UncheckedIcon/>}
+                        </UserRecordField>
                     </div>
                 <span className="user-record-button">
                     {
