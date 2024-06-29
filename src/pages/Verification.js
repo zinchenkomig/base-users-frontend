@@ -8,7 +8,6 @@ export default function Verification(){
     const [verificationState, setVerificationState] = useState("verifying")
     const data = useLoaderData();
     useEffect(() => {
-        console.log("here")
         axios.post("/auth/verify", data).then(
             (response) => {
                 if (response.status === 200){

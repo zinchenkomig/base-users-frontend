@@ -83,7 +83,8 @@ export default function Login(){
             </form>
             <div className="login-choose-container">
                 <TelegramLogin/>
-                <Link to={`/signup`}>Sign Up</Link>
+                <div><Link to={`/forgot_password`}>Forgot password?</Link></div>
+                <div><Link to={`/signup`}>Sign Up</Link></div>
             </div>
         </div>
     )

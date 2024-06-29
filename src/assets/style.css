@@ -320,4 +320,24 @@ button.no-bg-button:disabled:hover {
   display: flex;
   align-items: center;
 }
+.content-container {
+  background-color: var(--text-container);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  padding: 2rem;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.indent-top {
+  margin-top: 3rem;
+}
+.indent-left {
+  margin-left: 8rem;
+}
 /*# sourceMappingURL=style.css.map */

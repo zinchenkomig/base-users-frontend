@@ -11,6 +11,10 @@ import {useContext} from "react";
 import AuthContext from "./context/auth";
 import ProfileDropDown from "./components/ProfileDropDown";
 import Verification from "./pages/Verification";
+import ForgotPassword from "./pages/ForgotPassword";
+import VerificationEmailSent from "./pages/info/VerificationEmailSent";
+import SignupSuccess from "./pages/info/SignupSuccess";
+import RecoverPassword from "./pages/RecoverPassword";
 
 
 const router = createBrowserRouter([
@@ -44,6 +48,25 @@ const router = createBrowserRouter([
             {
                 path: "signup",
                 element: <SignUp/>
+            },
+            {
+                path: "forgot_password",
+                element: <ForgotPassword/>
+            },
+            {
+                path: "verification_sent",
+                element: <VerificationEmailSent/>
+            },
+            {
+                path: "signup_success",
+                element: <SignupSuccess/>
+            },
+            {
+                path: "recover_password/:token",
+                element: <RecoverPassword/>,
+                loader:  async ({ params }) => {
+                    return {"token": params.token};
+                }
             },
             {
                 path: "verify/:user_guid",
