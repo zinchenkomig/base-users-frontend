@@ -68,7 +68,11 @@ export default function SignUp(){
                             pattern: {
                                 value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
                                 message: 'Invalid email format'
-                            }
+                            },
+                            minLength: {
+                                value: 4,
+                                message: "Minimum length is 4"
+                            },
                         })}
                     />
                     {errors.email && <div className="input-warning">{errors.email.message}</div>}

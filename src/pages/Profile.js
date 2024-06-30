@@ -52,7 +52,8 @@ export default function Profile(){
                 <div className="profile-field">
                     {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> :
                         <div>
-                            <button type="submit" className="button-half">Save</button> <button type="button" className="button-half" onClick={()=>setIsEditing(false)}>Cancel</button>
+                            <button type="submit" className="button-half">Save</button>
+                            <button type="button" className="button-half" onClick={()=>setIsEditing(false)}>Cancel</button>
                         </div>}
                 </div>
                 <div>
