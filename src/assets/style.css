@@ -13,6 +13,7 @@
   --warning: #cc3300;
   --success: #4CAB4083;
   --fail: #ab3d49;
+  --alt: #A29590;
 }
 .success {
   color: var(--success);
@@ -46,7 +47,7 @@ input {
   border-radius: 4px;
   border: none;
   font-size: 20px;
-  padding: 0 12px;
+  padding: 0 1rem;
   color: var(--link);
 }
 input:focus {
@@ -60,8 +61,10 @@ button {
   font-size: 18px;
   color: var(--dark-bg);
   cursor: pointer;
-  width: 232px;
-  margin: 0.5rem;
+  width: 15rem;
+}
+.alt-color {
+  background-color: var(--alt);
 }
 .nav-link {
   padding: 1rem 2rem;
@@ -86,15 +89,77 @@ button {
     margin: 3rem 3rem 1rem;
   }
 }
+@media only screen and (max-width: 480px) {
+  .message-content {
+    margin: 2rem 0 1rem;
+  }
+}
+@media only screen and (min-width: 481px) {
+  .message-content {
+    margin: 3rem 3rem 1rem;
+    max-width: 60rem;
+  }
+}
+.login-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media only screen and (max-width: 850px) {
+  .login-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 851px) {
+  .login-frame {
+    background-color: var(--text-container);
+    width: 40rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .message-frame {
+    padding: 2rem;
+    background-color: var(--text-container);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media only screen and (min-width: 851px) {
+  .message-frame {
+    background-color: var(--text-container);
+    width: 40rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .input-field {
-  margin-bottom: 24px;
+  margin-bottom: 1rem;
 }
 .input-warning {
   color: var(--warning);
   padding-left: 0.3rem;
+  width: 15rem;
+}
+.button-half {
+  width: 7.5rem;
 }
 .login-choose-container {
   padding: 1rem 0.3rem;
+}
+hr {
+  border: 1px solid var(--grey-text);
+}
+.login-hr {
+  width: 18rem;
 }
 .users-table {
   border: var(--visited-link);
@@ -300,6 +365,7 @@ button.no-bg-button:disabled:hover {
 }
 .login-input {
   height: 3rem;
+  width: 13rem;
 }
 .icon {
   border: none;

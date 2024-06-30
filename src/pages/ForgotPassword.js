@@ -34,7 +34,8 @@ export default function ForgotPassword(){
     }
 
     return (
-        <div className="content-container">
+        <div className="login-content">
+            <div className="message-frame">
             <h3>Forgot Password?</h3>
             <p>Please type your email. We will send you a verification link so you can change your password.</p>
             <form method="post" onSubmit={handleSubmit(onSubmit)}>
@@ -65,6 +66,7 @@ export default function ForgotPassword(){
                     </div>
                 </div>
             </form>
+            </div>
         </div>
     )
 }

@@ -22,7 +22,7 @@ export default function SignUp(){
         axios.post('/auth/register', data)
             .then(function (response) {
                 if (response.status === 201) {
-                    navigate('/')
+                    navigate('/signup_success')
                 }
             })
             .catch(function (error) {
@@ -40,7 +40,8 @@ export default function SignUp(){
     }
 
     return (
-        <div>
+        <div className="login-content">
+            <div className="login-frame">
             <h3>Sign Up Form</h3>
             <form method="post" onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field">
@@ -105,6 +106,7 @@ export default function SignUp(){
                 <button className="btn btn-primary" type="submit">Submit</button>
                 {submitError && <div className="input-warning">{submitError}</div>}
             </form>
+            </div>
         </div>
     )
 }

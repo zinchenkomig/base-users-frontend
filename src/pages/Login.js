@@ -52,7 +52,8 @@ export default function Login(){
             );
     }
     return (
-        <div>
+        <div className="login-content">
+            <div className="login-frame">
             <h3>Login</h3>
             <form method="post" onSubmit={handleSubmit(onSubmit)}>
                 <div className="input-field">
@@ -84,7 +85,13 @@ export default function Login(){
             <div className="login-choose-container">
                 <TelegramLogin/>
                 <div><Link to={`/forgot_password`}>Forgot password?</Link></div>
+            </div>
+                <hr className="login-hr"/>
+
+            <div className="center indent-top">
+                <div>Don't have an account?</div>
                 <div><Link to={`/signup`}>Sign Up</Link></div>
+            </div>
             </div>
         </div>
     )
