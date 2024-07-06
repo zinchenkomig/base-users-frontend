@@ -3,7 +3,6 @@ import axios from "../api/backend";
 import {CancelButton, CheckButton, DeleteButton, EditButton} from "../components/Buttons";
 import {useContext, useState} from "react";
 import AuthContext from "../context/auth";
-import Select from 'react-select'
 import {CheckedIcon, UncheckedIcon} from "../components/Icons";
 import {MultiSelect} from "../components/Inputs";
 
@@ -67,7 +66,7 @@ function UserRecord(user){
         <div className="user-record-container">
             <div className="user-record">
                     <div className="user-record-info">
-                        <span><img src={user.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="user-small-pic" alt="profile"/></span>
+                        <span><img src={user?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="user-small-pic" alt="profile"/></span>
                         <UserRecordField isSingle={true} fieldName="Username:">
                             {!isEditing ?
                             user.username:

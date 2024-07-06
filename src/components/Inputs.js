@@ -12,8 +12,8 @@ export function MultiSelect({options, defaultValue}){
 
 export function EditableField({isEditing, label, defaultValue, name}){
     return (
-        <div className="editable-field">
-            <div>{label}</div> <div className="editable-field-input">{isEditing ? <input name={name} type="text" defaultValue={defaultValue} className="in-record-input"/> : defaultValue} </div>
+        <div className="profile-row">
+            <div className="profile-row-name">{label}</div> <div className="editable-field-input">{isEditing ? <input name={name} type="text" defaultValue={defaultValue} className="in-record-input"/> : defaultValue} </div>
         </div>
     )
 }

@@ -38,28 +38,31 @@ export default function Profile(){
             {userQuery.isFetched ?
                 <>
             <div className="profile-pic-container">
-                <img src={userQuery?.data.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} alt="profile"/>
+                <img src={userQuery?.data?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} alt="profile"/>
             </div>
+                    <div>
             <div className="profile-info-container">
                 <EditableField label="First name:" isEditing={isEditing}
-                               name="first_name" defaultValue={userQuery?.data['first_name']} />
+                               name="first_name" defaultValue={userQuery?.data?.first_name} />
+                <div><hr/></div>
                 <EditableField label="Last name:" isEditing={isEditing}
-                               name="last_name" defaultValue={userQuery?.data['last_name']} />
+                               name="last_name" defaultValue={userQuery?.data?.last_name} />
+                <div><hr/></div>
                 <EditableField label="Email:" isEditing={isEditing}
-                               name="email" defaultValue={userQuery?.data['email']} />
+                               name="email" defaultValue={userQuery?.data?.email} />
+                <div><hr/></div>
                 <EditableField label="Username:" isEditing={false}
-                               defaultValue={userQuery?.data['username']} />
-                <div className="profile-field">
-                    {!isEditing ? <button onClick={() => setIsEditing(true)}>Edit</button> :
-                        <div>
-                            <button type="submit" className="button-half">Save</button>
-                            <button type="button" className="button-half" onClick={()=>setIsEditing(false)}>Cancel</button>
-                        </div>}
-                </div>
-                <div>
-                    <button type="button">Change Password</button>
-                </div>
+                               defaultValue={userQuery?.data?.username} />
             </div>
+                        <div className="center">
+                            {!isEditing ? <button className="button-margin" onClick={() => setIsEditing(true)}>Edit</button> :
+                                <div>
+                                    <button type="submit" className="button-margin">Save</button>
+                                    <button type="button" className="alt-button" onClick={()=>setIsEditing(false)}>Cancel</button>
+                                </div>}
+                        </div>
+                    </div>
+
                 </>: 'Loading'
             }
                 </div>

@@ -42,7 +42,7 @@ const ProfileDropDown = () => {
 
     return (
         <div ref={wrapperRef} className="dropdown-profile-container">
-        <div className={(isOpened ? "nav-link-toggled" :"nav-link") + " profile-icon"}
+        <div className={(isOpened ? "link link--elara link--elara-active" :"link link--elara") + " nav-link profile-icon"}
              onClick={() =>
              { if (!isOpened && userInfo.user_guid){setIsOpened(true)}
                 else if(!userInfo.user_guid){navigate('/login')}

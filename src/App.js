@@ -1,4 +1,4 @@
-import {createBrowserRouter, Link, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, Link, NavLink, Outlet, RouterProvider} from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -86,6 +86,14 @@ export default function App(){
     )
 }
 
+function NavBar({to, children}){
+    return (
+        <NavLink to={to} className={({ isActive}) => isActive ? `link link--elara link--elara-active` : `link link--elara`}>
+            {children}
+        </NavLink>
+    )
+}
+
 
 function Root() {
     const { userInfo } = useContext(AuthContext);
@@ -94,10 +102,10 @@ function Root() {
   return (
       <div>
       <nav>
-          <Link className="nav-link" to={`/`}>Home</Link>
+          <NavBar to={`/`}>Home</NavBar>
 
           {userInfo?.roles?.includes("admin")
-              ? <Link className="nav-link" to={`/manage/users`}>Manage</Link>
+              ? <NavBar to={`/manage/users`}>Manage</NavBar>
               : <></>
           }
 

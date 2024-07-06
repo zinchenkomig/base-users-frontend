@@ -2,8 +2,11 @@
 :root {
   --white-text: #b6c2d9;
   --grey-text: #8891a2;
+  --dark-shadow: #202226;
   --dark-bg: #272932;
-  --visited-link: #9E90A2;
+  --primary: #9E90A2;
+  --secondary: #4f3b46;
+  --accent: #947CA9;
   --link: #828489;
   --hovered: #2D2F3AFF;
   --profile-container: #3c3e4d;
@@ -22,7 +25,7 @@
   color: var(--fail);
 }
 a:visited {
-  color: var(--visited-link);
+  color: var(--primary);
 }
 a {
   color: var(--link);
@@ -30,6 +33,7 @@ a {
 nav {
   display: flex;
   width: 100%;
+  border-bottom: var(--dark-shadow) solid 3px;
 }
 body {
   background-color: var(--dark-bg);
@@ -56,27 +60,73 @@ input:focus {
 }
 button {
   padding: 1rem;
-  background-color: var(--visited-link);
+  background-color: var(--primary);
   border: none;
   font-size: 18px;
   color: var(--dark-bg);
   cursor: pointer;
   width: 15rem;
+  border-radius: 0.5rem;
+  transition: all 0.1s linear;
+}
+button:hover {
+  scale: 1.05;
+}
+button:active {
+  scale: 1.08;
 }
 .alt-color {
   background-color: var(--alt);
 }
 .nav-link {
-  padding: 1rem 2rem;
-  color: var(--visited-link);
+  color: var(--primary);
 }
-.nav-link:hover {
-  background-color: var(--hovered);
-}
-.nav-link-toggled {
+.link {
   padding: 1rem 2rem;
-  color: var(--visited-link);
-  background-color: var(--hovered);
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  white-space: nowrap;
+  color: var(--primary);
+  text-decoration: none;
+  text-align: center;
+}
+.link::before,
+.link::after {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  top: 100%;
+  left: 0;
+  pointer-events: none;
+}
+.link::before {
+  content: '';
+  /* show by default */
+}
+.link--elara {
+  font-size: 1.375rem;
+}
+.link--elara::before {
+  transform-origin: 50% 100%;
+  transition: clip-path 0.3s, transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+  clip-path: polygon(0% 0%, 0% 100%, 0 100%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 100% 100%, 100% 0%);
+}
+.link--elara:hover::before {
+  transform: translate3d(0, 2px, 0) scale3d(1, 3, 1);
+  clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 50% 0, 50% 0, 50% 100%, 50% 100%, 0 100%, 100% 100%, 100% 0%);
+}
+.link--elara-active::before {
+  transform: translate3d(0, 2px, 0) scale3d(1, 3, 1);
+  clip-path: polygon(0% 0%, 0% 100%, 50% 100%, 50% 0, 50% 0, 50% 100%, 50% 100%, 0 100%, 100% 100%, 100% 0%);
+}
+.link--elara span {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.2, 1, 0.8, 1);
+}
+.link--elara:hover span {
+  transform: translate3d(0, -2px, 0);
 }
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 480px) {
@@ -152,6 +202,10 @@ button {
 .button-half {
   width: 7.5rem;
 }
+.button-margin {
+  width: 7rem;
+  margin: 0.8rem;
+}
 .login-choose-container {
   padding: 1rem 0.3rem;
 }
@@ -162,7 +216,7 @@ hr {
   width: 18rem;
 }
 .users-table {
-  border: var(--visited-link);
+  border: var(--primary);
   border-radius: 1px;
   display: flex;
   flex-direction: column;
@@ -184,9 +238,10 @@ hr {
 .profile-info-container {
   align-self: center;
   margin-top: 2rem;
-  gap: 1rem;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  border: var(--grey-text) 1px solid;
 }
 .profile-pic-container {
   display: flex;
@@ -381,7 +436,7 @@ button.no-bg-button:disabled:hover {
 }
 .editable-field-input {
   margin-left: 1rem;
-  height: 3rem;
+  height: 4rem;
   max-width: 20rem;
   display: flex;
   align-items: center;
@@ -405,5 +460,22 @@ button.no-bg-button:disabled:hover {
 }
 .indent-left {
   margin-left: 8rem;
+}
+.profile-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.profile-row-name {
+  width: 10rem;
+}
+.alt-button {
+  margin: 0.5rem;
+  background-color: var(--secondary);
+  color: var(--white-text);
+  cursor: pointer;
+  width: 7rem;
 }
 /*# sourceMappingURL=style.css.map */
