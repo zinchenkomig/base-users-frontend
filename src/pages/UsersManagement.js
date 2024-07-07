@@ -1,10 +1,11 @@
-import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query";
+import {useQuery, useMutation, useQueryClient, keepPreviousData} from "@tanstack/react-query";
 import axios from "../api/backend";
 import {CancelButton, CheckButton, DeleteButton, EditButton} from "../components/Buttons";
 import {useContext, useState} from "react";
 import AuthContext from "../context/auth";
 import {CheckedIcon, UncheckedIcon} from "../components/Icons";
 import {MultiSelect} from "../components/Inputs";
+import {FaSearch} from "react-icons/fa";
 
 
 
@@ -125,23 +126,45 @@ function UserRecord(user){
     )
 }
 
-export default function UserManagement(){
-    const usersQuery = useQuery({queryKey: ["users"],
-                                         queryFn: () => axios.get('/superuser/users/all')
-                                             .then((response) => {console.log(response.data);
-                                                 return response.data;})
-                                        }
-                               )
-    if (usersQuery.status === 'loading') return (<div>Loading...</div>)
-        else if (usersQuery.isError) return (<div>Error. Cannot load users.</div>)
-            else {
-                return (
-                    <div className="users-table">
-                        {usersQuery.data.map((user) => (
-                            <UserRecord key={user.id} {...user}/>
-                        ))}
-                    </div>
-                )
-    }
+function SearchInput({onChange}){
+    return (
+        <div className="input-icon-container">
+            <FaSearch className="input-icon"/>
+            <input onChange={onChange} className="full-width search-input"/>
+        </div>
+    )
+}
 
+export default function UserManagement(){
+    const [searchString, setSearchString] = useState("")
+    const usersQuery = useQuery({
+            queryKey: ["users", searchString],
+
+            queryFn: () => axios.get('/superuser/users', {
+                                             params: {
+                                                 "search": searchString
+                                             }
+                                         })
+                                             .then((response) => {console.log(response.data);
+                                                 return response.data;}),
+            placeholderData: keepPreviousData
+
+                                        }
+
+                               )
+    return (
+        <div>
+            <div className="search-input-container">
+                <SearchInput onChange={(e) => e.target.value.length >= 2 || e.target.value.length === 0 ? setSearchString(e.target.value) : null}/>
+            </div>
+            {usersQuery.isPending ? <div>Loading</div> :
+                <div className="users-table">
+                {usersQuery.data.map((user) => (
+                    <UserRecord key={user.id} {...user}/>
+                ))}
+                </div>
+            }
+
+        </div>
+    )
 }
