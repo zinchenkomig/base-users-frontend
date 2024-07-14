@@ -8,6 +8,7 @@ import {useState} from "react";
 export default function SignUp(){
     const { register, watch, handleSubmit, setError, formState: { errors } } = useForm({mode: "onBlur"});
     const [submitError, setSubmitError] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate();
 
     async function validate_username(username){
@@ -19,10 +20,12 @@ export default function SignUp(){
     }
 
     function onSubmit(data) {
+        setIsLoading(true)
         axios.post('/auth/register', data)
             .then(function (response) {
                 if (response.status === 201) {
                     navigate('/signup_success')
+                    setIsLoading(false)
                 }
             })
             .catch(function (error) {
@@ -36,6 +39,7 @@ export default function SignUp(){
                         setSubmitError("User creation failed!")
                     }
                 }
+                setIsLoading(false)
             });
     }
 
@@ -108,6 +112,10 @@ export default function SignUp(){
                     {errors.repeat_password && <div className="input-warning">{errors.repeat_password.message}</div>}
                 </div>
                 <button className="btn btn-primary" type="submit">Submit</button>
+                {isLoading &&
+                    <div className="center indent-top">
+                    <div className="loader"/>
+                </div> }
                 {submitError && <div className="input-warning">{submitError}</div>}
             </form>
             </div>

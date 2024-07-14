@@ -145,24 +145,34 @@ export default function UserManagement(){
                                                  "search": searchString
                                              }
                                          })
-                                             .then((response) => {console.log(response.data);
-                                                 return response.data;}),
+                                             .then((response) => {
+                                                 return response.data;})
+                .catch(),
             placeholderData: keepPreviousData
-
                                         }
-
                                )
     return (
         <div>
             <div className="search-input-container">
                 <SearchInput onChange={(e) => e.target.value.length >= 2 || e.target.value.length === 0 ? setSearchString(e.target.value) : null}/>
             </div>
-            {usersQuery.isPending ? <div>Loading</div> :
-                <div className="users-table">
+            { (usersQuery.isPending || usersQuery.isLoading) ?
+                <div className="center indent-top">
+                    <div className="loader"/>
+                </div>
+                    :
+                (!usersQuery.isSuccess ?
+                    <div className="center indent-top">
+                     <div className="fail">Error while loading: {usersQuery.error.message}</div>
+                    </div>
+                    :
+                    (<div className="users-table">
                 {usersQuery.data.map((user) => (
                     <UserRecord key={user.id} {...user}/>
                 ))}
                 </div>
+                    )
+                )
             }
 
         </div>

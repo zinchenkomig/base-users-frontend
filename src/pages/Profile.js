@@ -1,6 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {useContext, useState} from "react";
-import AuthContext from "../context/auth";
+import {useState} from "react";
 import axios from "../api/backend";
 import {EditableField} from "../components/Inputs";
 
@@ -35,7 +34,16 @@ export default function Profile(){
     return(
         <form method="post" onSubmit={onSubmitEdit}>
         <div className="profile-container" >
-            {userQuery.isFetched ?
+            {
+                (userQuery.isPending || userQuery.isLoading) ?
+                    <div className="center indent-top">
+                        <div className="loader"/>
+                    </div>:
+                    !userQuery.isSuccess ?
+                        <div className="center indent-top">
+                            <div className="fail">Error while loading: {userQuery.error.message}</div>
+                        </div>
+                        :
                 <>
             <div className="profile-pic-container">
                 <img src={userQuery?.data?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} alt="profile"/>
@@ -62,8 +70,7 @@ export default function Profile(){
                                 </div>}
                         </div>
                     </div>
-
-                </>: 'Loading'
+                </>
             }
                 </div>
         </form>
