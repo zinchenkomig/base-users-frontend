@@ -1,4 +1,4 @@
-import {createBrowserRouter, Link, NavLink, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -15,6 +15,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerificationEmailSent from "./pages/info/VerificationEmailSent";
 import SignupSuccess from "./pages/info/SignupSuccess";
 import RecoverPassword from "./pages/RecoverPassword";
+import Home from "./pages/Home";
 
 
 const router = createBrowserRouter([
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
                         element: <UserManagement/>,
                     }
                 ]
+            },
+            {
+              path: "",
+              element: <Home/>
             },
             {
                 path: "login",
@@ -118,7 +123,6 @@ function Root() {
               <Outlet/>
           </div>
       </div>
-
   );
 }
 

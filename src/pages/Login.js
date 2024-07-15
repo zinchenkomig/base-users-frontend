@@ -23,12 +23,14 @@ export default function Login(){
                 if (response.status === 200) {
                     localStorage.setItem('username', response.data.username);
                     localStorage.setItem('roles', response.data.roles)
+                    localStorage.setItem('photo_url', response.data.photo_url)
                     localStorage.setItem('user_guid', response.data.guid)
                     flushSync(() => {
                         setUserInfo({
                             username: response.data.username,
                             roles: response.data.roles,
-                            user_guid: response.data.guid
+                            user_guid: response.data.guid,
+                            photo_url: response.data.photo_url,
                         })
                     });
                     navigate('/profile');
@@ -110,11 +112,13 @@ function TelegramLogin(){
                     localStorage.setItem('user_guid', response.data.guid);
                     localStorage.setItem('username', response.data.username);
                     localStorage.setItem('roles', response.data.roles);
+                    localStorage.setItem('photo_url', response.data.photo_url)
                     flushSync(() => {
                         setUserInfo({
                             user_guid: response.data.guid,
                             username: response.data.username,
-                            roles: response.data.roles
+                            roles: response.data.roles,
+                            photo_url: response.data.photo_url,
                         })
                     });
                     navigate('/profile');
@@ -148,7 +152,7 @@ function TelegramLogin(){
         return () =>{
             el.removeChild(script)
         }
-    }, []);
+    });
 
     return (
         <div id="telegram-login">

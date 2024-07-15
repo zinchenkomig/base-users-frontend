@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) => {
         {
             user_guid: localStorage.getItem('user_guid'),
             username: localStorage.getItem('username'),
+            photo_url: localStorage.getItem('photo_url'),
             roles: localStorage.getItem('roles')?.split(','),
                   }
         );
