@@ -1,9 +1,10 @@
 import {keepPreviousData, useQuery, useQueryClient} from "@tanstack/react-query";
 import axios from "../api/backend";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/auth";
 import {useForm} from "react-hook-form";
 import {FormatISODate} from "../features/utils";
+import {flushSync} from "react-dom";
 
 
 function Tweet(tweet){
@@ -23,11 +24,55 @@ function Tweet(tweet){
     )
 }
 
+
+function DirtyButton(props){
+    const [started, setStarted] = useState(false)
+    const [buttonText, setButtonText] = useState("Go!")
+    const [count, setCount] = useState(0)
+
+    const buttonVariants = [
+        "Push me!",
+        "Touch me!",
+        "Let's go!",
+        "Come on, baby!",
+        "Go!"
+    ]
+
+    useEffect(() => {
+        const timer = setTimeout(() =>
+        {
+            if (started === true){
+                setCount(() => count + 1)
+                setButtonText(buttonVariants[count % buttonVariants.length])
+            }
+        }, 1e3)
+        return () => clearTimeout(timer)
+    }, [count, started])
+
+    return (
+        <button {...props}
+        onClick={()=> {
+            setStarted(false);
+            setButtonText("MMMM, YEESS!!!");
+            setTimeout(() => {
+                setButtonText("Go!")
+            }, 1.5e3)
+        }}
+                onMouseEnter={()=>{setStarted(true)}}
+                onMouseLeave={()=>setStarted(false)} className="go-button">{buttonText}</button>
+    )
+
+}
+
+
 export default function Home(){
     const { userInfo } = useContext(AuthContext);
     const queryClient = useQueryClient()
     const {handleSubmit, register} = useForm()
     const [inpValue, setInpValue] = useState('')
+
+
+
 
     const tweetsQuery = useQuery({
             queryKey: ["tweets"],
@@ -81,7 +126,7 @@ export default function Home(){
                                                       value={inpValue}
                                                       onChange={e => setInpValue(e.target.value)}
                                             />
-                                            <button type="submit">Go!</button>
+                                            <DirtyButton type="submit"/>
                                         </div>
                                     </form>
                                 </div>: <></>
