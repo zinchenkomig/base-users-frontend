@@ -36,8 +36,9 @@ const ProfileDropDown = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('roles');
         localStorage.removeItem('user_guid');
+        localStorage.removeItem('photo_url')
         setUserInfo({});
-        navigate('/')
+        navigate('/login')
     }
 
     return (
