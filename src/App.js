@@ -1,4 +1,4 @@
-import {createBrowserRouter, NavLink, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, NavLink, Outlet, RouterProvider, useNavigate} from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -16,6 +16,7 @@ import VerificationEmailSent from "./pages/info/VerificationEmailSent";
 import SignupSuccess from "./pages/info/SignupSuccess";
 import RecoverPassword from "./pages/RecoverPassword";
 import Home from "./pages/Home";
+import globalRouter from "./hooks/globalRouter";
 
 
 const router = createBrowserRouter([
@@ -101,7 +102,10 @@ function NavBar({to, children}){
 
 
 function Root() {
-    const { userInfo } = useContext(AuthContext);
+    const { userInfo, setUserInfo } = useContext(AuthContext);
+
+    globalRouter.navigate = useNavigate();
+    globalRouter.setUserInfo = setUserInfo;
 
 
   return (

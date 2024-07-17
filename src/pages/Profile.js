@@ -11,7 +11,12 @@ export default function Profile(){
     const userQuery = useQuery({queryKey: ["current-user"],
             queryFn: () => axios.get('/user/info')
                 .then((response) => {console.log(response.data);
-                    return response.data;})
+                    return response.data;}
+                ).catch((error) => {
+                    if (error.response.status === 401){
+
+                    }
+                })
         }
     )
 
