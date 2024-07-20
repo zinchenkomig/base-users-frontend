@@ -1,10 +1,10 @@
-import {keepPreviousData, useQuery, useQueryClient} from "@tanstack/react-query";
+import {useInfiniteQuery, useQueryClient} from "@tanstack/react-query";
 import axios from "../api/backend";
-import {useContext, useEffect, useState} from "react";
+import {Fragment, useContext, useEffect, useRef, useState} from "react";
 import AuthContext from "../context/auth";
 import {useForm} from "react-hook-form";
 import {FormatISODate} from "../features/utils";
-import {flushSync} from "react-dom";
+import {useInView} from "react-intersection-observer";
 
 
 function Tweet(tweet){
@@ -66,34 +66,45 @@ function DirtyButton(props){
 
 
 export default function Home(){
+
     const { userInfo } = useContext(AuthContext);
     const queryClient = useQueryClient()
     const {handleSubmit, register} = useForm()
     const [inpValue, setInpValue] = useState('')
-
-
-
-
-    const tweetsQuery = useQuery({
-            queryKey: ["tweets"],
-
-            queryFn: () => axios.get('/tweets/all')
+    const pageSize = 20
+    const queryTweets = async ({pageParam}) => {
+        return await axios.get('/tweets', {params: {page: pageParam, limit: pageSize}})
                 .then((response) => {
-                    return response.data;}),
-            placeholderData: keepPreviousData
+                    return response.data;
+                })
+    }
+
+    const tweetsQuery = useInfiniteQuery({
+        queryKey: ["tweets"],
+        queryFn: queryTweets,
+        initialPageParam: 1,
+        getNextPageParam: (lastPage, pages, lastPageParam) => lastPageParam + 1,
         }
     )
 
+    const { ref } = useInView({onChange:
+            async (inView) => {
+                if (inView){
+                    await tweetsQuery.fetchNextPage()
+                }
+    }});
+
     const onSubmit = async (data) => {
-        console.log(data)
         await axios.post('/tweets/new', data)
             .then((response) =>
             {
                 if (response.status === 200){
                     queryClient.invalidateQueries({ queryKey: ['tweets'] })
                     setInpValue('')
-                } else {
-                    console.log(response)
+                    queryClient.setQueryData(['tweets'], (data) => ({
+                        pages: data.pages.slice(0, 1),
+                        pageParams: data.pageParams.slice(0, 1),
+                    }))
                 }
 
             })
@@ -131,9 +142,24 @@ export default function Home(){
                                     </form>
                                 </div>: <></>
                                 }
-                                {tweetsQuery.data.map((tweet) => (
-                                    <Tweet key={tweet.guid} {...tweet}/>
-                                ))}
+                                {tweetsQuery.data.pages.map((group, i) => {
+                                    return(
+                                    <Fragment key={i}>
+                                        {group.map((tweet) => {
+                                            return (
+                                                <Tweet key={tweet.guid} {...tweet}/>
+                                            )
+                                        }
+                                        )}
+                                    </Fragment>
+                                )})}
+
+                                <div ref={ref}>
+                                </div>
+
+                                {tweetsQuery.isFetchingNextPage && <div className="center indent-top"> <div className="loader"/></div>}
+
+
                             </div>
                         )
                 )
