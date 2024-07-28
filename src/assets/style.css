@@ -619,4 +619,13 @@ button.no-bg-button:disabled:hover {
 .go-button {
   background-color: #a46ba2;
 }
-/*# sourceMappingURL=style.css.map */
+input[type="file"] {
+  display: none;
+}
+.file-upload {
+  border: var(--grey-text) solid 1px;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 0.5rem;
+  cursor: pointer;
+}
