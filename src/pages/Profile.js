@@ -67,34 +67,34 @@ export default function Profile(){
   };
 
   return(
-    <form method="post" onSubmit={onSubmitEdit}>
-      <div className="profile-container" >
-        {
-          (userQuery.isPending || userQuery.isLoading) ?
+    <div className="profile-container" >
+      {
+        (userQuery.isPending || userQuery.isLoading) ?
+          <div className="center indent-top">
+            <div className="loader"/>
+          </div>:
+          !userQuery.isSuccess ?
             <div className="center indent-top">
-              <div className="loader"/>
-            </div>:
-            !userQuery.isSuccess ?
-              <div className="center indent-top">
-                <div className="fail">Error while loading: {userQuery.error.message}</div>
-              </div>
-              :
-              <>
-                <div className="center">
-                  <div className="profile-pic-container">
-                    <img src={userQuery?.data?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} alt="profile"/>
-                  </div>
-                  <div className="center indent-top">
+              <div className="fail">Error while loading: {userQuery.error.message}</div>
+            </div>
+            :
+            <>
+              <div className="center">
+                <div className="profile-pic-container">
+                  <img src={userQuery?.data?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} alt="profile"/>
+                </div>
+                <div className="center indent-top">
                   <label for="file" className="file-upload">
-                  <input id="file" type="file" onChange={handleFileChange} />
+                    <input id="file" type="file" onChange={handleFileChange} />
                     Choose file</label>
                   { file && <>{file.name} ({HumanFileSize(file.size)}) </>}
                   <div><button onClick={handleUpload} className="button-margin">Upload</button></div>
-                  </div>
-
                 </div>
 
+              </div>
 
+
+              <form method="post" onSubmit={onSubmitEdit}>
                 <div>
                   <div className="profile-info-container">
                     <EditableField label="First name:" isEditing={isEditing}
@@ -117,9 +117,9 @@ export default function Profile(){
                       </div>}
                   </div>
                 </div>
+              </form>
               </>
         }
       </div>
-    </form>
   )
 }
