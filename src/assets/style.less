@@ -1,6 +1,9 @@
-@import (css) url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import (css) url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
-:root{
+:root {
   --white-text: #b6c2d9;
   --grey-text: #8891a2;
   --dark-shadow: #202226;
@@ -21,42 +24,43 @@
   --alt: #A29590;
 }
 
-.success{
+.success {
   color: var(--success);
 }
 
-.fail{
+.fail {
   color: var(--fail);
 }
 
-a:visited{
+a:visited {
   color: var(--primary);
 }
 
-a{
+a {
   color: var(--link);
 }
 
-nav{
+nav {
   display: flex;
   width: 100%;
   border-bottom: var(--dark-shadow) solid 3px;
 }
 
-body{
+body {
   background-color: var(--dark-bg);
   color: var(--white-text);
   font-size: 20px;
   font-family: 'Quicksand', sans-serif;
+  font-weight: 300;
   margin: 0;
 }
 
-form{
+form {
   display: flex;
   flex-direction: column;
 }
 
-input{
+input {
   box-sizing: border-box;
   background-color: var(--input);
   border-radius: 4px;
@@ -66,12 +70,12 @@ input{
   color: var(--link)
 }
 
-input:focus{
+input:focus {
   /*background-color: #9E90A2;*/
   outline: var(--input-focused) solid;
 }
 
-button{
+button {
   padding: 1rem;
   background-color: var(--primary);
   border: none;
@@ -84,26 +88,28 @@ button{
   font-weight: 600;
 }
 
-button:hover{
+button:hover {
   scale: 1.05;
 }
 
-button:active{
+button:active {
   scale: 1.08;
 }
 
-.alt-color{
+.alt-color {
   background-color: var(--alt);
 }
 
-.nav-link{
+.nav-link {
   color: var(--primary);
 }
 
 .link {
   padding: 1rem 2rem;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  font-weight: 400;
   cursor: pointer;
-  font-size: 18px;
   position: relative;
   white-space: nowrap;
   color: var(--primary);
@@ -127,9 +133,6 @@ button:active{
   /* show by default */
 }
 
-.link--elara {
-  font-size: 1.375rem;
-}
 
 .link--elara::before {
   transform-origin: 50% 100%;
@@ -158,25 +161,25 @@ button:active{
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-width: 480px) {
-  .main-content{
+  .main-content {
     margin: 2rem 0 1rem;
   }
 }
 
 @media only screen and (min-width: 481px) {
-  .main-content{
+  .main-content {
     margin: 3rem 3rem 1rem;
   }
 }
 
 @media only screen and (max-width: 480px) {
-  .message-content{
+  .message-content {
     margin: 2rem 0 1rem;
   }
 }
 
 @media only screen and (min-width: 481px) {
-  .message-content{
+  .message-content {
     margin: 3rem 3rem 1rem;
     max-width: 60rem;
   }
@@ -191,7 +194,7 @@ button:active{
 }
 
 @media only screen and (max-width: 850px) {
-  .login-frame{
+  .login-frame {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -210,7 +213,7 @@ button:active{
 }
 
 @media only screen and (max-width: 850px) {
-  .message-frame{
+  .message-frame {
     padding: 2rem;
     background-color: var(--text-container);
     display: flex;
@@ -231,52 +234,52 @@ button:active{
 }
 
 
-.input-field{
+.input-field {
   margin-bottom: 1rem;
 }
 
-.input-warning{
+.input-warning {
   color: var(--warning);
   padding-left: 0.3rem;
   width: 15rem;
 }
 
-.button-half{
+.button-half {
   width: 7.5rem;
 }
 
-.button-margin{
+.button-margin {
   width: 7rem;
   margin: 0.8rem;
 }
 
-.login-choose-container{
+.login-choose-container {
   padding: 1rem 0.3rem;
 }
 
-hr{
-  border: 1px solid var(--grey-text) ;
+hr {
+  border: 1px solid var(--grey-text);
 }
 
-.login-hr{
+.login-hr {
   width: 18rem;
 }
 
-.users-table{
+.users-table {
   border: var(--primary);
   border-radius: 1px;
   display: flex;
   flex-direction: column;
 }
 
-.user-record-container{
+.user-record-container {
   background-color: var(--text-container);
   margin-bottom: 0.7rem;
   padding: 0.8rem;
   position: relative;
 }
 
-.tweet-record-container{
+.tweet-record-container {
   background-color: var(--text-container);
   border-radius: 15px;
   margin-bottom: 0.7rem;
@@ -284,7 +287,7 @@ hr{
   position: relative;
 }
 
-.profile-container{
+.profile-container {
   background-color: var(--text-container);
   display: flex;
   justify-content: center;
@@ -293,7 +296,7 @@ hr{
   padding: 2rem;
 }
 
-.profile-info-container{
+.profile-info-container {
   align-self: center;
   margin-top: 2rem;
   display: flex;
@@ -302,7 +305,7 @@ hr{
   border: var(--grey-text) 1px solid;
 }
 
-.profile-pic-container{
+.profile-pic-container {
   display: flex;
   height: 200px;
   width: 200px;
@@ -314,24 +317,24 @@ hr{
   margin: -20px;
 }
 
-.right-align{
+.right-align {
   position: absolute;
   right: 0;
 }
 
-.dropdown-profile-container{
+.dropdown-profile-container {
   position: relative;
 }
 
-.profile-dropdown-link{
+.profile-dropdown-link {
   color: var(--link);
 }
 
-.profile-dropdown-link:visited{
+.profile-dropdown-link:visited {
   color: var(--link);
 }
 
-.profile-dropdown{
+.profile-dropdown {
   background-color: var(--profile-container);
   position: absolute;
   top: 70px;
@@ -342,13 +345,13 @@ hr{
 
 }
 
-.profile-dropdown ul{
+.profile-dropdown ul {
   list-style-type: none;
   padding: 0 1rem;
   margin: 1rem;
 }
 
-.profile-dropdown-name{
+.profile-dropdown-name {
   padding-block: 10px;
   font-size: 24px;
   position: relative;
@@ -357,32 +360,22 @@ hr{
   text-align: center;
 }
 
-.profile-dropdown-body{
-  padding: 20px;
-}
-
-.profile-icon{
-  position: relative;
-  right: 0;
-  width: 1rem;
-}
-
-.disabled{
+.disabled {
   pointer-events: none;
 }
 
-.user-record{
+.user-record {
   display: grid;
   grid-template-columns: 6fr 1.5fr;
   align-items: center;
 }
 
-.user-record-button{
+.user-record-button {
   display: flex;
   justify-content: flex-end;
 }
 
-button.no-bg-button{
+button.no-bg-button {
   border: none;
   background: none;
   color: var(--link);
@@ -391,20 +384,20 @@ button.no-bg-button{
   padding: 1rem;
 }
 
-button.no-bg-button:hover{
+button.no-bg-button:hover {
   background: rgba(255, 255, 255, 0.03);
 }
 
-button.no-bg-button:disabled{
+button.no-bg-button:disabled {
   color: var(--input-focused);
   cursor: not-allowed;
 }
 
-button.no-bg-button:disabled:hover{
+button.no-bg-button:disabled:hover {
   background: none;
 }
 
-.in-record-input{
+.in-record-input {
   background: rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   width: 95%;
@@ -415,16 +408,16 @@ button.no-bg-button:disabled:hover{
   color: var(--white-text);
 }
 
-.in-record-input::placeholder{
+.in-record-input::placeholder {
   color: var(--white-text);
 }
 
-.fader{
+.fader {
   position: absolute;
   background-color: rgba(45, 45, 45, 0.3);
   z-index: 1000;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
 }
@@ -449,93 +442,93 @@ button.no-bg-button:disabled:hover{
 
 
 
-.user-record-info{
+.user-record-info {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.user-record-info-field-name{
+.user-record-info-field-name {
   color: var(--grey-text);
   margin-bottom: 1rem;
   font-size: 16px;
 }
 
-.user-record-info-field{
+.user-record-info-field {
   min-width: 14rem;
 }
 
-.user-record-info-value-single{
+.user-record-info-value-single {
   height: 3rem;
 }
 
-.user-record-info-value{
+.user-record-info-value {
   max-width: 20rem;
 }
 
 
-.multi-select-container{
+.multi-select-container {
   height: 90%;
   padding: 0.5rem 0;
   background-color: var(--dark-bg);
   border-style: none;
 }
 
-.multi-select__control{
+.multi-select__control {
   height: 90%;
   background-color: var(--dark-bg);
 }
 
-.multi-select__multi-value{
+.multi-select__multi-value {
   background-color: var(--input);
   padding: 0.2rem;
 }
 
-.multi-select__value-container{
+.multi-select__value-container {
   padding-left: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.multi-select__multi-value__label{
+.multi-select__multi-value__label {
   padding: 0.1rem 0.7rem;
 }
 
-.multi-select__multi-value__remove{
+.multi-select__multi-value__remove {
   background-color: var(--input);
 }
 
-.multi-select__indicator{
+.multi-select__indicator {
   color: var(--white-text);
 }
 
-.multi-select__multi-value__remove:hover{
+.multi-select__multi-value__remove:hover {
   background-color: var(--link);
 }
 
-.multi-select__menu{
+.multi-select__menu {
   background-color: var(--input);
 }
 
-.multi-select__menu-list{
+.multi-select__menu-list {
   gap: 2rem;
 }
 
-.multi-select__option{
+.multi-select__option {
   padding: 0.8rem;
 }
 
-.multi-select__option:hover{
+.multi-select__option:hover {
   background-color: var(--input-focused);
 }
 
-.login-input{
+.login-input {
   height: 3rem;
   width: 15rem;
 }
 
-.icon{
+.icon {
   border: none;
   background: none;
   font-size: 2rem;
@@ -543,13 +536,13 @@ button.no-bg-button:disabled:hover{
   padding: 0.2rem;
 }
 
-.editable-field{
+.editable-field {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.editable-field-input{
+.editable-field-input {
   margin-left: 1rem;
   height: 4rem;
   max-width: 20rem;
@@ -557,7 +550,7 @@ button.no-bg-button:disabled:hover{
   align-items: center;
 }
 
-.content-container{
+.content-container {
   background-color: var(--text-container);
   display: flex;
   justify-content: center;
@@ -567,17 +560,17 @@ button.no-bg-button:disabled:hover{
   padding: 2rem;
 }
 
-.center{
+.center {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.indent-top{
+.indent-top {
   margin-top: 3rem;
 }
 
-.indent-left{
+.indent-left {
   margin-left: 8rem;
 }
 
@@ -589,11 +582,11 @@ button.no-bg-button:disabled:hover{
   padding-right: 1rem;
 }
 
-.profile-row-name{
+.profile-row-name {
   width: 10rem;
 }
 
-.alt-button{
+.alt-button {
   margin: 0.5rem;
   background-color: var(--secondary);
   color: var(--dark-bg);
@@ -601,22 +594,22 @@ button.no-bg-button:disabled:hover{
   width: 7rem;
 }
 
-.full-width{
+.full-width {
   width: 100%
 }
 
-.search-input{
+.search-input {
   height: 4rem;
   padding-left: 3rem;
 }
 
-.search-input-container{
+.search-input-container {
   display: flex;
   justify-content: center;
   margin: 1.5rem;
 }
 
-.input-icon-container{
+.input-icon-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -624,7 +617,7 @@ button.no-bg-button:disabled:hover{
   max-width: 50rem;
 }
 
-.input-icon{
+.input-icon {
   position: absolute;
   left: 0.8rem;
 }
@@ -633,15 +626,16 @@ button.no-bg-button:disabled:hover{
 .loader {
   width: 40px;
   height: 20px;
-  --c:no-repeat radial-gradient(farthest-side,var(--secondary) 93%, var(--secondary));
+  --c: no-repeat radial-gradient(farthest-side, var(--secondary) 93%, var(--secondary));
   background:
-          var(--c) 0    0,
-          var(--c) 50%  0,
-          var(--c) 100% 0;
+    var(--c) 0 0,
+    var(--c) 50% 0,
+    var(--c) 100% 0;
   background-size: 8px 8px;
   position: relative;
   animation: l4-0 1s linear infinite alternate;
 }
+
 .loader:before {
   content: "";
   position: absolute;
@@ -651,24 +645,47 @@ button.no-bg-button:disabled:hover{
   left: 0;
   top: 0;
   animation:
-          l4-1 1s  linear infinite alternate,
-          l4-2 0.5s cubic-bezier(0,200,.8,200) infinite;
-}
-@keyframes l4-0 {
-  0%      {background-position: 0  100%,50% 0   ,100% 0}
-  8%,42%  {background-position: 0  0   ,50% 0   ,100% 0}
-  50%     {background-position: 0  0   ,50% 100%,100% 0}
-  58%,92% {background-position: 0  0   ,50% 0   ,100% 0}
-  100%    {background-position: 0  0   ,50% 0   ,100% 100%}
-}
-@keyframes l4-1 {
-  100% {left:calc(100% - 8px)}
-}
-@keyframes l4-2 {
-  100% {top:-0.1px}
+    l4-1 1s linear infinite alternate,
+    l4-2 0.5s cubic-bezier(0, 200, .8, 200) infinite;
 }
 
-.tweet-user-container{
+@keyframes l4-0 {
+  0% {
+    background-position: 0 100%, 50% 0, 100% 0
+  }
+
+  8%,
+  42% {
+    background-position: 0 0, 50% 0, 100% 0
+  }
+
+  50% {
+    background-position: 0 0, 50% 100%, 100% 0
+  }
+
+  58%,
+  92% {
+    background-position: 0 0, 50% 0, 100% 0
+  }
+
+  100% {
+    background-position: 0 0, 50% 0, 100% 100%
+  }
+}
+
+@keyframes l4-1 {
+  100% {
+    left: calc(100% - 8px)
+  }
+}
+
+@keyframes l4-2 {
+  100% {
+    top: -0.1px
+  }
+}
+
+.tweet-user-container {
   gap: 2rem;
   display: flex;
   flex-direction: row;
@@ -678,7 +695,7 @@ button.no-bg-button:disabled:hover{
   align-items: center;
 }
 
-.tweet-container{
+.tweet-container {
   padding: 1.5rem;
   gap: 2rem;
   display: flex;
@@ -689,32 +706,18 @@ button.no-bg-button:disabled:hover{
   border-radius: 10px;
 }
 
-.tweet-input{
-  height: 5rem;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: var(--input);
-  border-radius: 4px;
-  border: none;
-  line-height: 1.2rem;
-  font-size: 16px;
-  padding: 1.2rem;
-  resize: none;
-  color: var(--link)
-}
-
-.tweet-input:focus{
+.tweet-input:focus {
   /*background-color: #9E90A2;*/
   outline: var(--input-focused) solid;
 }
 
-.tweets-table{
+.tweets-table {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-.created-at-label{
+.created-at-label {
   color: var(--grey-text);
   font-size: 14px;
   margin: 0.2rem;
@@ -723,18 +726,10 @@ button.no-bg-button:disabled:hover{
   flex-direction: column;
 }
 
-.go-button{
+.go-button {
   background-color: #a46ba2;
 }
 
 input[type="file"] {
   display: none;
-}
-
-.file-upload{
-  border: var(--grey-text) solid 1px;
-  border-radius: 3px;
-  display: inline-block;
-  padding: 0.5rem;
-  cursor: pointer;
 }

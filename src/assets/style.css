@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --white-text: #b6c2d9;
   --grey-text: #8891a2;
@@ -41,6 +44,7 @@ body {
   color: var(--white-text);
   font-size: 20px;
   font-family: 'Quicksand', sans-serif;
+  font-weight: 300;
   margin: 0;
 }
 form {
@@ -86,8 +90,10 @@ button:active {
 }
 .link {
   padding: 1rem 2rem;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  font-weight: 400;
   cursor: pointer;
-  font-size: 18px;
   position: relative;
   white-space: nowrap;
   color: var(--primary);
@@ -107,9 +113,6 @@ button:active {
 .link::before {
   content: '';
   /* show by default */
-}
-.link--elara {
-  font-size: 1.375rem;
 }
 .link--elara::before {
   transform-origin: 50% 100%;
@@ -297,14 +300,6 @@ hr {
   top: 0;
   border-bottom: solid var(--dark-bg) 2px;
   text-align: center;
-}
-.profile-dropdown-body {
-  padding: 20px;
-}
-.profile-icon {
-  position: relative;
-  right: 0;
-  width: 1rem;
 }
 .disabled {
   pointer-events: none;
@@ -586,19 +581,6 @@ button.no-bg-button:disabled:hover {
   white-space: pre-line;
   border-radius: 10px;
 }
-.tweet-input {
-  height: 5rem;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: var(--input);
-  border-radius: 4px;
-  border: none;
-  line-height: 1.2rem;
-  font-size: 16px;
-  padding: 1.2rem;
-  resize: none;
-  color: var(--link);
-}
 .tweet-input:focus {
   /*background-color: #9E90A2;*/
   outline: var(--input-focused) solid;
@@ -621,11 +603,4 @@ button.no-bg-button:disabled:hover {
 }
 input[type="file"] {
   display: none;
-}
-.file-upload {
-  border: var(--grey-text) solid 1px;
-  border-radius: 3px;
-  display: inline-block;
-  padding: 0.5rem;
-  cursor: pointer;
 }
