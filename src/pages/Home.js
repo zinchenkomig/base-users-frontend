@@ -5,17 +5,46 @@ import AuthContext from "../context/auth";
 import { useForm } from "react-hook-form";
 import { FormatISODate } from "../features/utils";
 import { useInView } from "react-intersection-observer";
+import ReactTextareaAutosize from "react-textarea-autosize";
 
+
+function truncateStringByLinesOrWords(str, maxLines, maxWords) {
+  const lines = str.split('\n')
+  let totalWords = 0
+  let totalLines = 0
+  for (const line of lines) {
+    totalLines += 1
+    if (totalLines >= maxLines) {
+      return lines.slice(0, totalLines).join('\n')
+    }
+    const words = line.split(' ')
+    let lineWords = 0
+    for (const word of words) {
+      lineWords += 1
+      totalWords += 1
+      if (totalWords > maxWords) {
+        return lines.slice(0, totalLines - 1).join('\n') + '\n' + words.slice(0, lineWords - 1).join(' ')
+      }
+    }
+  }
+  return str
+
+
+}
 
 function Tweet(tweet) {
+  const truncatedTweet = truncateStringByLinesOrWords(tweet.message, 3, 60)
+  const [showMore, setShowMore] = useState(truncatedTweet.length === tweet.message.length)
+
   return (
     <div className="tweet-record-container">
       <div className="tweet-user-container">
         <img src={tweet.created_by?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="user-xs-pic" alt="profile" />
         <div><b>{tweet.created_by?.first_name + ' ' + tweet.created_by?.last_name}</b></div>
       </div>
-      <div className="tweet-container">
-        {tweet.message}
+      <div className="px-4 pt-2 whitespace-pre-wrap">
+        {showMore ? tweet.message : truncatedTweet}
+        {!showMore && <span className="text-gray-300 text-lg  cursor-pointer pl-6" onClick={() => setShowMore(true)}>... show more</span>}
       </div>
       <div className="created-at-label">
         {FormatISODate(tweet.created_at)}
@@ -58,7 +87,10 @@ function DirtyButton(props) {
         }, 1.5e3)
       }}
       onMouseEnter={() => { setStarted(true) }}
-      onMouseLeave={() => setStarted(false)} className="p-4 bg-purple-300 max-w-36 font-bold">{buttonText}</button>
+      onMouseLeave={() => setStarted(false)}
+      className="p-4 bg-purple-300 sm:max-w-36 w-28 font-bold">
+      {buttonText}
+    </button>
   )
 
 }
@@ -127,17 +159,25 @@ export default function Home() {
             {userInfo?.user_guid ?
               <div>
                 <form method="post" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="flex flex-row items-center gap-4 sm:gap-8 rounded-xl p-8 bg-gradient-to-t from-gray-700 to-gray-500">
-                    <img src={userInfo.photo_url !== "null" && userInfo.photo_url ? userInfo.photo_url : process.env.REACT_APP_PROFILE_PIC_STUB} className="rounded-full object-cover object-center w-14 sm:w-20 h-14 sm:h-20 flex-none" alt="profile" />
-                    <textarea id="message"
-                      placeholder="Tell your story..."
-                      className="p-6 outline-none focus:outline-1 focus:outline focus:outline-gray-300 resize-none flex-1 rounded-lg bg-gray-400 placeholder:text-gray-300 text-lg"
-                      required={true}
-                      {...register("message")}
-                      value={inpValue}
-                      onChange={e => setInpValue(e.target.value)}
-                    />
-                    <DirtyButton type="submit" />
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 rounded-xl p-2 sm:p-8 bg-gradient-to-t from-gray-700 to-gray-500">
+                    <div className="flex flex-none justify-center">
+                      <img src={userInfo.photo_url !== "null" && userInfo.photo_url ? userInfo.photo_url : process.env.REACT_APP_PROFILE_PIC_STUB}
+                        className="rounded-full object-cover object-center w-16 h-16 flex-none" alt="profile" />
+                    </div>
+                    <div className="w-full">
+                      <ReactTextareaAutosize id="message"
+                        maxRows={12}
+                        placeholder="Tell your story..."
+                        className="p-2 w-full min-h-24 sm:p-6 outline-none focus:outline-1 focus:outline focus:outline-gray-300 resize-none flex-1 rounded-lg bg-gray-400 placeholder:text-gray-300 text-lg"
+                        required={true}
+                        {...register("message")}
+                        value={inpValue}
+                        onChange={e => setInpValue(e.target.value)}
+                      />
+                    </div>
+                    <div className="flex justify-center">
+                      <DirtyButton type="submit" />
+                    </div>
                   </div>
                 </form>
               </div> : <></>
