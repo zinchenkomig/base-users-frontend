@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/auth";
 import { useContext, useEffect } from "react";
 import { flushSync } from "react-dom";
+import { getAccessTokenInfo } from "../features/auth"
 
 const telegram_bot_id = process.env.REACT_APP_TG_BOT_ID
 
@@ -16,22 +17,16 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     let dataForm = new FormData();
-    dataForm.append('username', data['username']);
+    dataForm.append('username', data['email']);
     dataForm.append('password', data['password']);
-    await axios.post('/auth/token', dataForm)
+    await axios.post('/auth/login/email', dataForm)
       .then((response) => {
         if (response.status === 200) {
-          localStorage.setItem('username', response.data.username);
-          localStorage.setItem('roles', response.data.roles)
-          localStorage.setItem('photo_url', response.data.photo_url)
-          localStorage.setItem('user_guid', response.data.guid)
+          localStorage.setItem('access_token', response.data.access_token);
+          const userInfo = getAccessTokenInfo(response.data.access_token)
+          console.log(userInfo)
           flushSync(() => {
-            setUserInfo({
-              username: response.data.username,
-              roles: response.data.roles,
-              user_guid: response.data.guid,
-              photo_url: response.data.photo_url,
-            })
+            setUserInfo(userInfo)
           });
           navigate('/profile');
         }
@@ -40,7 +35,7 @@ export default function Login() {
           setError("password", { type: "custom", message: "Server is not available" })
         }
         else {
-          if (error.response.status === 401) {
+          if (error.response.status === 400) {
             setError("password", { type: "focus", message: error.response.data.detail })
           }
           if (error.response.status === 500) {
@@ -59,15 +54,15 @@ export default function Login() {
         <div className="text-2xl font-normal">Login</div>
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
           <div className="input-field mt-6">
-            <div>Username</div>
+            <div>Email</div>
             <input
-              id="username"
+              id="email"
               className="login-input"
-              {...register("username", {
+              {...register("email", {
                 required: "This field is required"
               })}
             />
-            {errors.username && <div className="input-warning">{errors.username.message}</div>}
+            {errors.email && <div className="input-warning">{errors.email.message}</div>}
           </div>
           <div className="input-field">
             <div>Password</div>
@@ -105,21 +100,14 @@ function TelegramLogin() {
   const { setUserInfo } = useContext(AuthContext);
 
   const dataOnauth = (userData) => {
-    axios.post('/auth/tg/login', userData)
+    axios.post('/auth/login/tg', userData)
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data)
-          localStorage.setItem('user_guid', response.data.guid);
-          localStorage.setItem('username', response.data.username);
-          localStorage.setItem('roles', response.data.roles);
-          localStorage.setItem('photo_url', response.data.photo_url)
+          localStorage.setItem('access_token', response.data.access_token);
+          const userInfo = getAccessTokenInfo(response.data.access_token)
+          console.log(userInfo)
           flushSync(() => {
-            setUserInfo({
-              user_guid: response.data.guid,
-              username: response.data.username,
-              roles: response.data.roles,
-              photo_url: response.data.photo_url,
-            })
+            setUserInfo(userInfo)
           });
           navigate('/profile');
         }

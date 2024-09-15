@@ -7,9 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 function useOutsideAlerter(ref, setIsOpened) {
   useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
         setIsOpened(false)
@@ -33,10 +30,8 @@ const ProfileDropDown = () => {
 
   async function onLogoutClick() {
     await axios.post('/auth/logout');
-    localStorage.removeItem('username');
-    localStorage.removeItem('roles');
-    localStorage.removeItem('user_guid');
-    localStorage.removeItem('photo_url')
+    console.log(userInfo)
+    localStorage.removeItem('access_token');
     setUserInfo({});
     navigate('/login')
   }
@@ -53,8 +48,8 @@ const ProfileDropDown = () => {
         <FaUser />
       </div>
       {isOpened && userInfo.user_guid &&
-        <div className="absolute shadow-lg border border-gray-300 m-3 shadow-gray-600 right-1 z-10 rounded-md bg-gray-700">
-          <div className="border-b border-gray-300 px-4 py-2 text-2xl relative text-center">{userInfo.username || 'unknown username'}</div>
+        <div className="absolute shadow-lg border border-gray-300 m-3 shadow-gray-600 right-1 z-10 rounded md bg-gray-700">
+          <div className="border-b border-gray-300 px-4 py-2 text-2xl relative text-center">{userInfo.first_name || 'unknown username'}</div>
           <div className="p-4 pt-0">
             <ul>
               <li className="py-8 text-center"> <Link className="text-2xl font-normal underline underline-offset-4"

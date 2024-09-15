@@ -107,7 +107,7 @@ export default function Home() {
     return await axios.get('/tweets', { params: { page: pageParam, limit: pageSize } })
       .then((response) => {
         return response.data;
-      })
+      }).catch((_)=>{})
   }
 
   const tweetsQuery = useInfiniteQuery({
@@ -138,8 +138,9 @@ export default function Home() {
             pageParams: data.pageParams.slice(0, 1),
           }))
         }
-
-      })
+      }).catch(
+        (_) => {}
+      )
 
   }
 

@@ -17,6 +17,7 @@ import SignupSuccess from "./pages/info/SignupSuccess";
 import RecoverPassword from "./pages/RecoverPassword";
 import Home from "./pages/Home";
 import globalRouter from "./hooks/globalRouter";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 const router = createBrowserRouter([
@@ -103,9 +104,11 @@ function NavBar({ to, children }) {
 
 function Root() {
   const { userInfo, setUserInfo } = useContext(AuthContext);
+  const queryClient = useQueryClient()
 
   globalRouter.navigate = useNavigate();
   globalRouter.setUserInfo = setUserInfo;
+  globalRouter.queryClient = queryClient;
 
 
   return (

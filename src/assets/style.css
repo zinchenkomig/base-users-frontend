@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,7 +43,7 @@ body {
   background-color: var(--dark-bg);
   color: var(--white-text);
   font-size: 20px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 300;
   margin: 0;
 }
@@ -603,4 +603,10 @@ button.no-bg-button:disabled:hover {
 }
 input[type="file"] {
   display: none;
+}
+.toast {
+  background-color: var(--accent);
+  color: var(--dark-bg);
+  font-size: large;
+  font-weight: 600;
 }
