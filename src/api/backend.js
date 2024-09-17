@@ -66,7 +66,7 @@ api.interceptors.response.use(
             return Promise.reject(err);
         }
     } else{
-        toast(error.response.data?.detail)
+        toast('Error: ' + error.response.data?.detail)
     }
     return Promise.reject(error);
 });
