@@ -551,3 +551,6 @@ button.no-bg-button:disabled:hover {
 input[type="file"] {
   display: none;
 }
+.super-shadow {
+  background-color: #444757;
+}

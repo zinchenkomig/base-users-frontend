@@ -47,15 +47,17 @@ const ProfileDropDown = () => {
         <FaUser />
       </div>
       {isOpened && userInfo.user_guid &&
-        <div className="absolute shadow-lg border border-gray-300 m-3 shadow-gray-700 right-1 z-10 rounded md bg-gray-700">
-          <div className="px-4 py-2 text-2xl relative text-center">{userInfo.first_name || 'unknown username'}</div>
+        <div className="absolute m-2 pt-2 pb-4 px-12 right-4 z-10 md shadow-xl rounded-3xl bg-gradient-to-t from-slate-800 to-slate-700">
+          <div className="px-4 py-2 text-2xl relative text-center text-gray-200 font-medium">
+            {userInfo.first_name || 'unknown username'}
+            </div>
           <div className="p-4 pt-0">
             <ul>
               <li className="py-8 text-center"> <Link className="text-2xl font-normal underline underline-offset-4"
                 onClick={() => { setIsOpened(false) }}
                 to={`/profile`}>Profile</Link> </li>
             </ul>
-            <button onClick={onLogoutClick}>Log Out</button>
+            <button onClick={onLogoutClick} className="text-xl w-44 h-14 p-0 rounded-2xl">Log Out</button>
           </div>
         </div>
       }
