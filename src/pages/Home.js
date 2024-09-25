@@ -38,7 +38,7 @@ function Tweet(tweet) {
 
   return (
     <div className="flex flex-row gap-2 sm:gap-6 mt-10 ml-2 mr-2">
-        <img src={tweet.created_by?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="inline-block h-12 sm:h-20 rounded-full object-cover" alt="profile" />
+        <img src={tweet.created_by?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="inline-block h-12 w-12 sm:h-20 sm:w-20 rounded-full object-cover flex-none" alt="profile" />
 
     <div className="bg-gray-600 rounded-xl max-w-lg">
       <div className="flex flex-row justify-between items-center align">
