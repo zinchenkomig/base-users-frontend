@@ -30,7 +30,6 @@ const ProfileDropDown = () => {
 
   async function onLogoutClick() {
     await axios.post('/auth/logout');
-    console.log(userInfo)
     localStorage.removeItem('access_token');
     setUserInfo({});
     navigate('/login')
@@ -48,8 +47,8 @@ const ProfileDropDown = () => {
         <FaUser />
       </div>
       {isOpened && userInfo.user_guid &&
-        <div className="absolute shadow-lg border border-gray-300 m-3 shadow-gray-600 right-1 z-10 rounded md bg-gray-700">
-          <div className="border-b border-gray-300 px-4 py-2 text-2xl relative text-center">{userInfo.first_name || 'unknown username'}</div>
+        <div className="absolute shadow-lg border border-gray-300 m-3 shadow-gray-700 right-1 z-10 rounded md bg-gray-700">
+          <div className="px-4 py-2 text-2xl relative text-center">{userInfo.first_name || 'unknown username'}</div>
           <div className="p-4 pt-0">
             <ul>
               <li className="py-8 text-center"> <Link className="text-2xl font-normal underline underline-offset-4"

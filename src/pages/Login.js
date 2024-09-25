@@ -24,7 +24,6 @@ export default function Login() {
         if (response.status === 200) {
           localStorage.setItem('access_token', response.data.access_token);
           const userInfo = getAccessTokenInfo(response.data.access_token)
-          console.log(userInfo)
           flushSync(() => {
             setUserInfo(userInfo)
           });
@@ -105,7 +104,6 @@ function TelegramLogin() {
         if (response.status === 200) {
           localStorage.setItem('access_token', response.data.access_token);
           const userInfo = getAccessTokenInfo(response.data.access_token)
-          console.log(userInfo)
           flushSync(() => {
             setUserInfo(userInfo)
           });

@@ -37,18 +37,23 @@ function Tweet(tweet) {
   const [showMore, setShowMore] = useState(truncatedTweet.length === tweet.message.length)
 
   return (
-    <div className="tweet-record-container">
-      <div className="tweet-user-container">
-        <img src={tweet.created_by?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="user-xs-pic" alt="profile" />
-        <div><b>{tweet.created_by?.first_name + ' ' + tweet.created_by?.last_name}</b></div>
+    <div className="flex flex-row gap-2 sm:gap-6 mt-10 ml-2 mr-2">
+        <img src={tweet.created_by?.photo_url || process.env.REACT_APP_PROFILE_PIC_STUB} className="inline-block h-12 sm:h-20 rounded-full object-cover" alt="profile" />
+
+    <div className="bg-gray-600 rounded-xl max-w-lg">
+      <div className="flex flex-row justify-between items-center align">
+      <div className="text-gray-300 text-md px-6 py-1">
+      {tweet.created_by?.first_name + ' ' + tweet.created_by?.last_name}
       </div>
-      <div className="px-4 pt-2 whitespace-pre-wrap">
-        {showMore ? tweet.message : truncatedTweet}
-        {!showMore && <span className="text-gray-300 text-lg  cursor-pointer pl-6" onClick={() => setShowMore(true)}>... show more</span>}
+      <div className="text-gray-300 px-4 py-1 text-xs">
+      {FormatISODate(tweet.created_at)}
       </div>
-      <div className="created-at-label">
-        {FormatISODate(tweet.created_at)}
       </div>
+
+      <div className="bg-gray-400 text-gray-200 relative top-0 rounded-xl px-6 py-8 whitespace-pre-wrap">
+      {showMore ? tweet.message : truncatedTweet}
+      {!showMore && <span className="text-gray-300 text-lg  cursor-pointer pl-6" onClick={() => setShowMore(true)}>...&nbsp;show&nbsp;more</span>}      </div>
+    </div>
     </div>
   )
 }
@@ -56,15 +61,14 @@ function Tweet(tweet) {
 
 function DirtyButton(props) {
   const [started, setStarted] = useState(false)
-  const [buttonText, setButtonText] = useState("Go!")
+  const [buttonText, setButtonText] = useState("Post")
   const [count, setCount] = useState(0)
 
   const buttonVariants = [
     "Push me!",
     "Touch me!",
     "Let's go!",
-    "Come on, baby!",
-    "Go!"
+    "Post"
   ]
 
   useEffect(() => {
@@ -79,16 +83,9 @@ function DirtyButton(props) {
 
   return (
     <button {...props}
-      onClick={() => {
-        setStarted(false);
-        setButtonText("MMMM, YEESS!!!");
-        setTimeout(() => {
-          setButtonText("Go!")
-        }, 1.5e3)
-      }}
       onMouseEnter={() => { setStarted(true) }}
       onMouseLeave={() => setStarted(false)}
-      className="p-4 bg-purple-300 sm:max-w-36 w-28 font-bold">
+      className="p-4 bg-cyan-600 rounded-full sm:max-w-36 w-28 font-bold">
       {buttonText}
     </button>
   )
@@ -156,11 +153,11 @@ export default function Home() {
             <div className="fail">Error while loading: {tweetsQuery.error.message}</div>
           </div>
           :
-          (<div className="tweets-table">
+          (<div className="flex flex-col gap-5 items-center">
             {userInfo?.user_guid ?
-              <div>
+              <div className="w-full max-w-3xl">
                 <form method="post" onSubmit={handleSubmit(onSubmit)}>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 rounded-xl p-2 sm:p-8 bg-gradient-to-t from-gray-700 to-gray-500">
+                  <div className="flex flex-col sm:items-center w-full gap-4 sm:gap-8 rounded-bl-3xl rounded-br-3xl p-4 sm:p-8 bg-gray-500">
                     <div className="flex flex-none justify-center">
                       <img src={userInfo.photo_url !== "null" && userInfo.photo_url ? userInfo.photo_url : process.env.REACT_APP_PROFILE_PIC_STUB}
                         className="rounded-full object-cover object-center w-16 h-16 flex-none" alt="profile" />
@@ -169,7 +166,7 @@ export default function Home() {
                       <ReactTextareaAutosize id="message"
                         maxRows={12}
                         placeholder="Tell your story..."
-                        className="p-2 w-full min-h-24 sm:p-6 outline-none focus:outline-1 focus:outline focus:outline-gray-300 resize-none flex-1 rounded-lg bg-gray-400 placeholder:text-gray-300 text-lg"
+                        className="p-4 w-full min-h-24 sm:p-6 outline-none focus:outline-1 focus:outline focus:outline-gray-300 resize-none flex-1 rounded-lg bg-gray-400 placeholder:text-gray-300 text-lg"
                         required={true}
                         {...register("message")}
                         value={inpValue}

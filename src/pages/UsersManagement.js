@@ -30,7 +30,6 @@ const options = [
 
 
 function UserRecord(user) {
-  console.log(typeof options)
   const [isEditing, setIsEditing] = useState(false);
   const { userInfo } = useContext(AuthContext);
   const queryClient = useQueryClient();
@@ -101,7 +100,6 @@ function UserRecord(user) {
                 <>
                   <EditButton type="button" onClick={() => {
                     setIsEditing(true);
-                    console.log(`Editing ${user.email}`)
                   }}
                   />
                   <DeleteButton type="button" onClick={() => {

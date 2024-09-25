@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 import axios from "../api/backend";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
+import toast from "react-hot-toast";
 
 export default function ForgotPassword(){
     const { register, handleSubmit, formState: { errors } } = useForm({mode: "onBlur"});
@@ -12,7 +13,7 @@ export default function ForgotPassword(){
         const is_exists = await axios.get('/check/email', {params: {email: email}})
             .then((response)=>{return response.data;}
             )
-            .catch((reason)=>{console.log(reason)})
+            .catch((reason)=>{toast(reason)})
         return is_exists || `Email ${email} is not registered`
     }
 

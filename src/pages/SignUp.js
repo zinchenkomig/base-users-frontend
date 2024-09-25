@@ -2,6 +2,7 @@ import axios from "../api/backend";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 
@@ -15,7 +16,7 @@ export default function SignUp() {
     const is_exists = await axios.get('/auth/check/email', { params: { email: email } })
       .then((response) => { return response.data; }
       )
-      .catch((reason) => { console.log(reason) })
+      .catch((reason) => { toast(reason) })
     return !is_exists || `Email ${email} is already registered`
   }
 

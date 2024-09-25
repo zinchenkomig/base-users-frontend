@@ -56,7 +56,6 @@ api.interceptors.response.use(
             const userInfo = getAccessTokenInfo(response.data.access_token)
             originalRequest.headers.Authorization = `Bearer ${response.data.access_token}`;
             globalRouter.setUserInfo(userInfo)
-            console.log('token renew end')
             return api(originalRequest)
         } catch (err) {
             globalRouter.queryClient.removeQueries()

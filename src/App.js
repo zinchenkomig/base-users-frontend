@@ -126,7 +126,7 @@ function Root() {
         </div>
 
       </nav>
-      <div className="main-content">
+      <div>
         <Outlet />
       </div>
     </div>
