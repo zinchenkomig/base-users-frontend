@@ -45,7 +45,7 @@ api.interceptors.response.use(
 }, 
     async function (error) {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry){
+    if (error?.response?.status === 401 && !originalRequest._retry){
         originalRequest._retry = true;
         if (localStorage.getItem("access_token") == null){
             globalRouter.navigate('/login')
@@ -65,7 +65,11 @@ api.interceptors.response.use(
             return Promise.reject(err);
         }
     } else{
-        toast('Error: ' + error.response.data?.detail)
+        if (error?.message === "Network Error"){
+            toast("Sorry! Server is not available. Try again later...");
+        } else{
+            toast('Error: ' + (error?.response?.data?.detail || error))
+        }
     }
     return Promise.reject(error);
 });

@@ -20,7 +20,8 @@ module.exports = {
         },
         red: {
           800: "#B24C4C"
-        }
+        },
+        'primary': "#9E90A2",
       },
     },
   },

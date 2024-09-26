@@ -13,8 +13,8 @@ export default function ForgotPassword(){
         const is_exists = await axios.get('/auth/check/email', {params: {email: email}})
             .then((response)=>{return response.data;}
             )
-            .catch((reason)=>{toast(reason)})
-        return is_exists || `Email ${email} is not registered`
+            .catch((_)=>{})
+        return (is_exists === undefined && 'Failed to verify email') || is_exists || `Email ${email} is not registered`
     }
 
     function onSubmit(data) {
@@ -25,12 +25,7 @@ export default function ForgotPassword(){
                 }
             })
             .catch(function (error) {
-                if (error.message === "Network Error"){
-                    setSubmitError("Sorry! Server is not available...");
-                }
-                else {
-                    setSubmitError("Failed to send a verification message!")
-                }
+                setSubmitError("Failed to send a verification message!")
             });
     }
 

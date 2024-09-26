@@ -13,11 +13,10 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   async function validate_email(email) {
-    const is_exists = await axios.get('/auth/check/email', { params: { email: email } })
-      .then((response) => { return response.data; }
-      )
-      .catch((reason) => { toast(reason) })
-    return !is_exists || `Email ${email} is already registered`
+    const isExists = await axios.get('/auth/check/email', { params: { email: email } })
+      .then((response) => { return response.data; })
+      .catch((_) => {})
+    return !isExists || `Email ${email} is already registered`
   }
 
   function onSubmit(data) {
@@ -30,15 +29,10 @@ export default function SignUp() {
         }
       })
       .catch(function(error) {
-        if (error.message === "Network Error") {
-          setSubmitError("Sorry! Server is not available...");
-        }
-        else {
-          if (error.response.status === 409) {
-            setError("email", { type: "focus", message: "Username already exists" })
-          } else {
-            setSubmitError("User creation failed!")
-          }
+        if (error?.response?.status === 409) {
+          setError("email", { type: "focus", message: "Email already exists" })
+        } else {
+          setSubmitError("User creation failed!")
         }
         setIsLoading(false)
       });
@@ -53,7 +47,7 @@ export default function SignUp() {
             <div>First Name</div>
             <input
               className="login-input"
-              type="first_name"
+              type="text"
               {...register("first_name", {
                 minLength: {
                   value: 3,

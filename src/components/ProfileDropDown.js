@@ -29,7 +29,7 @@ const ProfileDropDown = () => {
   const navigate = useNavigate()
 
   async function onLogoutClick() {
-    await axios.post('/auth/logout');
+    await axios.post('/auth/logout').catch((_)=>{});
     localStorage.removeItem('access_token');
     setUserInfo({});
     navigate('/login')

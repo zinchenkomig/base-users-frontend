@@ -180,10 +180,10 @@ export default function Home() {
                 </form>
               </div> : <></>
             }
-            {tweetsQuery.data.pages.map((group, i) => {
+            {tweetsQuery?.data?.pages?.map((group, i) => {
               return (
                 <Fragment key={i}>
-                  {group.map((tweet) => {
+                  {group?.map((tweet) => {
                     return (
                       <Tweet key={tweet.guid} {...tweet} />
                     )
