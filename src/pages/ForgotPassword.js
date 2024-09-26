@@ -10,7 +10,7 @@ export default function ForgotPassword(){
     const navigate = useNavigate();
 
     async function validate_email(email){
-        const is_exists = await axios.get('/check/email', {params: {email: email}})
+        const is_exists = await axios.get('/auth/check/email', {params: {email: email}})
             .then((response)=>{return response.data;}
             )
             .catch((reason)=>{toast(reason)})
@@ -35,14 +35,14 @@ export default function ForgotPassword(){
     }
 
     return (
-        <div className="login-content">
+        <div className="login-content mt-10">
             <div className="message-frame">
-            <h3>Forgot Password?</h3>
+            <div className="text-2xl mb-6">Forgot Password?</div>
             <p>Please type your email. We will send you a verification link so you can change your password.</p>
             <form method="post" onSubmit={handleSubmit(onSubmit)}>
                 <div className="center">
 
-            <div>
+            <div className="mt-6">
                 Email: <input
                 type="email"
                 className="login-input"
@@ -62,7 +62,7 @@ export default function ForgotPassword(){
                 {errors.email && <div className="input-warning">{errors.email.message}</div>}
             </div>
                     <div className="indent-top">
-                <button className="btn btn-primary" type="submit">Submit</button>
+                <button className="btn btn-primary" type="submit">Send verification email</button>
                 {submitError && <div className="input-warning">{submitError}</div>}
                     </div>
                 </div>

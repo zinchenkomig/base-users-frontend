@@ -2,12 +2,12 @@ import {Link} from "react-router-dom";
 
 export default function SignupSuccess(){
     return (
-        <div className="center">
-            <div className="message-frame">
-            <h3>Sign Up successful</h3>
-            <div>Now you need to verify your email. We sent you a message with a verification link</div>
-            <Link to="/login" className="indent-top">To Login Page</Link>
-        </div>
+        <div className="center mt-10">
+            <div className="message-frame text-md">
+                <div className="text-2xl mb-6">Sign Up successful</div>
+                <div>Now you need to verify your email. We sent you a message with a verification link</div>
+                <Link to="/login" className="mt-12 underline text-xl">To Login Page</Link>
+            </div>
         </div>
     )
 }

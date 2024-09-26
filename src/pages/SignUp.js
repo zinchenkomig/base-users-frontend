@@ -45,11 +45,11 @@ export default function SignUp() {
   }
 
   return (
-    <div className="login-content">
+    <div className="login-content mt-10">
       <div className="login-frame">
-        <h3>Sign Up Form</h3>
+        <div className="text-2xl mb-8">Sign Up Form</div>
         <form method="post" onSubmit={handleSubmit(onSubmit)}>
-        <div className="input-field">
+        <div className="input-field text-md">
             <div>First Name</div>
             <input
               className="login-input"
@@ -63,7 +63,7 @@ export default function SignUp() {
             />
             {errors.first_name && <div className="input-warning">{errors.first_name.message}</div>}
           </div>
-          <div className="input-field">
+          <div className="input-field text-md">
             <div>E-Mail</div>
             <input
               className="login-input"
@@ -82,7 +82,7 @@ export default function SignUp() {
             />
             {errors.email && <div className="input-warning">{errors.email.message}</div>}
           </div>
-          <div className="input-field">
+          <div className="input-field text-md">
             <div>Password</div>
             <input
               type="password"
@@ -97,7 +97,7 @@ export default function SignUp() {
             />
             {errors.password && <div className="input-warning">{errors.password.message}</div>}
           </div>
-          <div className="input-field">
+          <div className="input-field text-md">
             <div>Repeat password</div>
             <input
               type="password"
@@ -112,7 +112,7 @@ export default function SignUp() {
             />
             {errors.repeat_password && <div className="input-warning">{errors.repeat_password.message}</div>}
           </div>
-          <button className="btn btn-primary" type="submit">Submit</button>
+          <button className="btn btn-primary mt-8" type="submit">Submit</button>
           {isLoading &&
             <div className="center indent-top">
               <div className="loader" />

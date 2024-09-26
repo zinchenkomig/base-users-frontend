@@ -48,7 +48,7 @@ export default function Login() {
       );
   }
   return (
-    <div className="login-content">
+    <div className="login-content mt-10">
       <div className="login-frame">
         <div className="text-2xl font-normal">Login</div>
         <form method="post" onSubmit={handleSubmit(onSubmit)}>

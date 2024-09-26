@@ -25,7 +25,7 @@ export default function RecoverPassword(){
         })
     }
     return (
-        <div className="content-container">
+        <div className="content-container mt-10">
             <div className="center">
                 <h2>Password Recovery</h2>
                 <p>Fill the new password for your account</p>
