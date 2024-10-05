@@ -104,8 +104,8 @@ export default function Profile() {
                   <div className="center">
                     {!isEditing ? <button className="button-margin" onClick={() => setIsEditing(true)}>Edit</button> :
                       <div>
-                        <button type="button" className="m-3 w-28 h-16 border border-solid border-primary text-primary box-border bg-opacity-5 hover:bg-opacity-10 bg-primary" onClick={() => setIsEditing(false)}>Cancel</button>
                         <button type="submit" className="w-28 h-16 m-3">Save</button>
+                        <button type="button" className="m-3 w-28 h-16 border border-solid border-primary text-primary box-border bg-opacity-5 hover:bg-opacity-10 bg-primary" onClick={() => setIsEditing(false)}>Cancel</button>
                       </div>}
                   </div>
                 </div>
